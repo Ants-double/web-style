@@ -28,23 +28,23 @@
     </style>
     <a class="git-link" href="https://github.com/Ants-double"></a>
     <input type="image" id="Uleft"
-        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132102016-280648354.png"
-        onmouseover="this.style.top='10px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132110485-340298713.png' "
-        onmouseout="this.style.top='-60px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132102016-280648354.png' "
+        src="https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_200716070930kenan.jpg"
+        onmouseover="this.style.top='10px'; this.src='https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_200716070936xinyi.jpg' "
+        onmouseout="this.style.top='-45px'; this.src='https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_200716070930kenan.jpg' "
         onclick="ShowPicture()">
 
     <input type="image" id="Uright"
-        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132057500-1294518696.png"
-        onmouseover="this.style.top='10px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132044282-1070510381.png' "
-        onmouseout="this.style.top='-55px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132057500-1294518696.png' "
-        onclick="ChangePicture()" style="top: -55px;">
+        src="https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_20071607181615.jpg"
+        onmouseover="this.style.top='10px'; this.src='https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_20071607182316.png' "
+        onmouseout="this.style.top='-70px'; this.src='https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_20071607181615.jpg' "
+        onclick="ChangePicture()" style="top: -70px;">
 
     <input type="image" id="Dright"
-        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132721735-572062833.png"
+        src="https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_200716063648clickok.png"
         onclick="ShowTab()">
 
     <input type="image" id="MagicArray"
-        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132726032-1459872254.png"
+        src="https://images.cnblogs.com/cnblogs_com/ants_double/1807474/o_200716063658originok.png"
         onclick="ShowTab()">
 
     <a name="Tab" id="Tab1" href="https://www.cnblogs.com//" style="right:78px;bottom:165px;">博客园</a>
@@ -178,18 +178,18 @@
 
         function ShowTab() {
             dx = document.getElementById("MagicArray");
-            if (dx.style.width == "200px") {
-                dx.style.width = "0px";
+            if (dx.style.height == "200px") {
+                dx.style.width = "200px";
                 dx.style.height = "0px";
-                dx.style.bottom = "100px";
-                dx.style.right = "100px";
-                dx.style.transform = "rotate(0deg)";
+                dx.style.bottom = "10px";
+                dx.style.right = "0px";
+                dx.style.transform = "rotate(180deg)";
             } else {
                 dx.style.width = "200px";
                 dx.style.height = "200px";
-                dx.style.bottom = "0px";
+                dx.style.bottom = "10px";
                 dx.style.right = "0px";
-                dx.style.transform = "rotate(180deg)";
+                dx.style.transform = "rotate(0deg)";
             }
 
             dy = document.getElementsByName("Tab");
