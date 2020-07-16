@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+
+    <style>
+        #Canvas {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            opacity: 0.3;
+        }
+    </style>
+
+    <canvas id="Canvas"></canvas>
+
+
+    <style>
+        #nav {
+            width: 150px;
+            height: 400px;
+            border: 1px solid #D4CD49;
+            position: fixed;
+            left: 0;
+            top: 30%
+        }
+    </style>
+    <a class="git-link" href="https://github.com/Ants-double"></a>
+    <input type="image" id="Uleft"
+        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132102016-280648354.png"
+        onmouseover="this.style.top='10px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132110485-340298713.png' "
+        onmouseout="this.style.top='-60px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132102016-280648354.png' "
+        onclick="ShowPicture()">
+
+    <input type="image" id="Uright"
+        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132057500-1294518696.png"
+        onmouseover="this.style.top='10px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132044282-1070510381.png' "
+        onmouseout="this.style.top='-55px'; this.src='https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132057500-1294518696.png' "
+        onclick="ChangePicture()" style="top: -55px;">
+
+    <input type="image" id="Dright"
+        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132721735-572062833.png"
+        onclick="ShowTab()">
+
+    <input type="image" id="MagicArray"
+        src="https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132726032-1459872254.png"
+        onclick="ShowTab()">
+
+    <a name="Tab" id="Tab1" href="https://www.cnblogs.com//" style="right:78px;bottom:165px;">博客园</a>
+    <a name="Tab" id="Tab1" href="https://www.cnblogs.com/ants_double/" style="right:150px;bottom:130px;">首页</a>
+    <a name="Tab" id="Tab1" href="https://msg.cnblogs.com/send/ants_double" style="right:10px;bottom:130px;">私信博主</a>
+    <a name="Tab" id="Tab1" onclick="fixedIndexs.show()" style="right:120px;bottom:50px;">显示目录</a>
+    <a name="Tab" id="Tab1" onclick="fixedIndexs.hide()" style="right:20px;bottom:50px;">隐藏目录</a>
+    <a name="Tab" id="Tab1" href="https://i.cnblogs.com/" style="right:85px;bottom:10px;">管理</a>
+    <a name="Tab" id="Tab1" style="right:85px;bottom:88px;" onclick="control()">动画</a>
+
+    
+ 
+    <script>
+        window.requestAnimFrame =
+            window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function (callback) { window.setTimeout(callback, 1000 / 10); };
+        var W = document.body.scrollWidth, H = document.body.scrollHeight;
+        var ca = document.getElementById("Canvas"), el = ca.getContext("2d");
+        var num = 0, SpeedBasic = 3, SpeedRand = 0.8, angleBasic = 0.5, timer, lline = 20;
+        var x = new Array(), y = new Array(), speed = new Array(), angle = new Array(), t = new Array(), TT = new Array();
+        var img1 = new Image(), img2 = new Image(), img3 = new Image(), img4 = new Image();
+        ca.width = W; ca.height = H;
+        img1.src = "https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132729688-38554350.png";
+        img2.src = "https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132733563-1765368712.png";
+        img3.src = "https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132739141-33127178.png";
+        img4.src = "https://www.cnblogs.com/images/cnblogs_com/ants_double/1411802/o_841250-20170914132745860-1067567351.png";
+
+        function RandomNum(Min, Max) {
+            var Range = Max - Min;
+            var Rand = Math.random();
+            return (Min + Math.round(Rand * Range));
+        }
+        function RandomReal(Min, Max) {
+            return Min + (Max - Min) * Math.random();
+        }
+        function abs(W) { return W <= 0 ? -W : W; }
+        function drawtail(px, py, an) {
+            an = Math.atan(an);
+            for (var i = 0; i < 10; i++) {
+                var X, Y;
+                Y = Math.sqrt(RandomReal(0, lline * lline));
+                X = RandomReal(-Y * 5 / lline, Y * 5 / lline) + RandomReal(-Y * 5 / lline, Y * 5 / lline);
+                Y = lline - Y;
+                X += 10;
+                el.fillRect(px + (X * Math.cos(an) - Y * Math.sin(an)), py - (X * Math.sin(an) + Y * Math.cos(an)), 2, 2);
+            }
+        }
+        function drawstar(px, py, ti) {
+            if (ti == 1) el.drawImage(img1, px, py, 20, 20); else
+                if (ti == 2) el.drawImage(img2, px, py, 20, 20); else
+                    if (ti == 3) el.drawImage(img3, px, py, 20, 20); else
+                        if (ti == 4) el.drawImage(img4, px, py, 20, 20);
+        }
+        function drawline(sx, sy, px, py) {
+            el.beginPath();
+            el.moveTo(sx, sy);
+            el.lineTo(px, py);
+            el.stroke();
+            el.closePath();
+        }
+        function dis(sx, sy, px, py) {
+            return Math.sqrt((px - sx) * (px - sx) + (py - sy) * (py - sy));
+        }
+        function work(timestamp) {
+            if (RandomNum(0, 5) == 0) {
+                x.push(RandomNum(0, W));
+                y.push(RandomNum(0, H));
+                t.push(0);
+                TT.push(RandomNum(3, 10));
+                speed.push(SpeedBasic + RandomReal(-SpeedRand, SpeedRand) + RandomReal(-SpeedRand, SpeedRand) + RandomReal(-SpeedRand, SpeedRand));
+                angle.push(RandomReal(-angleBasic, angleBasic) + RandomReal(-angleBasic, angleBasic) + RandomReal(-angleBasic, angleBasic));
+                for (; ;) {
+                    if (Math.random() <= 0.7) y[num] = 0; else {
+                        y[num] %= 200;
+                        if (Math.random() <= 0.5) x[num] = 0, angle[num] = abs(angle[num]); else x[num] = W - 1, angle[num] = -abs(angle[num]);
+                    }
+                    var i;
+                    for (i = 0; i < num; i++) if (dis(x[i], y[i], x[num], y[num]) < 20) break;
+                    if (i == num) break;
+                    x[num] = RandomNum(0, W); y[num] = RandomNum(0, H);
+                }
+                num++;
+            }
+            el.clearRect(0, 0, W, H);
+            el.fillStyle = "#7B68EE";
+            var tmp;
+            for (var i = 0; i < num; i++)
+                for (var j = i + 1; j < num; j++)
+                    if (dis(x[i], y[i], x[j], y[j]) < 20) {
+                        tmp = speed[i];
+                        speed[i] = speed[j];
+                        speed[j] = tmp;
+
+                        tmp = angle[i];
+                        angle[i] = angle[j];
+                        angle[j] = tmp;
+                    }
+            for (var i = 0; i < num; i++) {
+                //el.fillRect(x[i],y[i],10,10);
+                drawtail(x[i], y[i], angle[i]);
+                drawstar(x[i], y[i], (parseInt(t[i] / TT[i]) % 4) + 1);
+                y[i] += speed[i]; x[i] += (speed[i] * angle[i]);
+                t[i]++;
+                if (y[i] >= H || x[i] < 0 || x[i] >= W) {
+                    num--;
+                    x[i] = x[num]; y[i] = y[num]; speed[i] = speed[num]; angle[i] = angle[num]; t[i] = t[num]; TT[i] = TT[num];
+                    x.pop(); y.pop(); speed.pop(); angle.pop(); t.pop(); TT.pop();
+                    i--;
+                }
+            }
+            timer = requestAnimationFrame(work);
+        }
+        timer = requestAnimationFrame(work);
+        var sta = 1;
+        function control() {
+            if (sta == 1) {
+                cancelAnimationFrame(timer);
+                ca.style.opacity = "0";
+                sta = 0;
+            } else {
+                timer = requestAnimationFrame(work);
+                ca.style.opacity = "1";
+                sta = 1;
+            }
+        }
+
+
+        function ShowTab() {
+            dx = document.getElementById("MagicArray");
+            if (dx.style.width == "200px") {
+                dx.style.width = "0px";
+                dx.style.height = "0px";
+                dx.style.bottom = "100px";
+                dx.style.right = "100px";
+                dx.style.transform = "rotate(0deg)";
+            } else {
+                dx.style.width = "200px";
+                dx.style.height = "200px";
+                dx.style.bottom = "0px";
+                dx.style.right = "0px";
+                dx.style.transform = "rotate(180deg)";
+            }
+
+            dy = document.getElementsByName("Tab");
+            for (var i = 0; i < dy.length; i++) {
+                dx = dy[i];
+                if (dx.style.fontSize == "15px") {
+                    dx.style.fontSize = "0px";
+                    dx.style.transitionDelay = "0s";
+                } else {
+                    dx.style.fontSize = "15px";
+                    dx.style.transitionDelay = "0.8s";
+                }
+            }
+        }
+        function ShowPicture() {
+            dx = document.getElementById("main");
+            if (dx.style.opacity == "0") dx.style.opacity = "0.9"; else dx.style.opacity = "0";
+        }
+        function ChangePicture() {
+            dx = document.body;
+            dy = RandomNum(0, 13);
+            if (dy == 0) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_01.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 1) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_02.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 2) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_03.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 3) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_04.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 4) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_05.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 5) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_06.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 6) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_07.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 7) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_08.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 8) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_09.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 9) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_10.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 10) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_11.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 11) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_12.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 12) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_13.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            } else if (dy == 13) {
+                dx.style.background = "url(https://www.cnblogs.com/images/cnblogs_com/ants_double/1503498/o_14.jpg) no-repeat fixed";
+                dx.style.backgroundSize = "cover";
+            }
+        }
+        ChangePicture();
+    </script>
+
+    <script type="text/javascript">
+        /* 鼠标特效 */
+        var a_idx = 0;
+        jQuery(document).ready(function ($) {
+            $("body").click(function (e) {
+                var a = new Array("❤关关雎鸠❤", "❤在河之洲❤", "❤窈窕淑女❤", "❤君子好逑❤", "❤参差荇菜❤", "❤左右流之❤", "❤窈窕淑女❤", "❤寤寐求之❤", "❤求之不得❤", "❤寤寐思服❤", "❤悠哉悠哉❤", "❤辗转反侧❤", "❤参差荇菜❤", "❤左右采之❤", "❤窈窕淑女❤", "❤琴瑟友之❤", "❤参差荇菜❤", "❤左右芼之❤", "❤窈窕淑女❤", "❤钟鼓乐之❤");
+                var $i = $("<span></span>").text(a[a_idx]);
+                a_idx = (a_idx + 1) % a.length;
+                var x = e.pageX,
+                    y = e.pageY;
+                $i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+                });
+                $("body").append($i);
+                $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                },
+                    1500,
+                    function () {
+                        $i.remove();
+                    });
+            });
+        });
+    </script>
+   
+</body>
+
+</html>
