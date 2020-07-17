@@ -434,8 +434,8 @@ a:active {
 }
 .diggit{
     text-align: center;
-    width:50px;
-    height:40px;
+    width:30px;
+    height:30px;
     background:url(https://www.cnblogs.com/images/cnblogs_com/billly/1411802/o_haha.png);
     background-size:100% 100%;
 }
@@ -880,6 +880,11 @@ a:active {
 /*留言分页区域*/
 .pages {
     text-align: right;
+}
+.diggnum {
+    font-size: 20px;
+    color: #075db3;
+    font-family: Verdana;
 }
 /*****留言页面结束*****************************/
 /*****第三部分结束*******************************/
