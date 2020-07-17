@@ -237,7 +237,7 @@ a:active {
 /*****home和头部开始**************************/
 #home {
     margin: 0 auto;
-    width:95%;
+    width:100%;
     min-width: 60em;
 }
 #header {
